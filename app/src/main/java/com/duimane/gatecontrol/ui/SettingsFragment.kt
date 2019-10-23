@@ -1,7 +1,5 @@
-package com.duimane.gatecontrol.ui.settings
+package com.duimane.gatecontrol.ui
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,16 +10,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.duimane.gatecontrol.R
-import com.duimane.gatecontrol.api.GateApiService
-import com.duimane.gatecontrol.api.model.TokenResponse
-import com.duimane.gatecontrol.constants.Constants
-import kotlinx.android.synthetic.main.fragment_settings.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.duimane.gatecontrol.service.TokenService
 
 class SettingsFragment : Fragment() {
 
@@ -63,46 +53,34 @@ class SettingsFragment : Fragment() {
         val username = usernameField.text.toString()
         val password = passwordField.text.toString()
 
+        if (baseUrl.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            setStatusMessage("Error: some filed values are missing!")
+            return
+        }
+
+        setStatusMessage("")
         disableUserInput()
-
         try {
-            GateApiService.configure(baseUrl)
-            GateApiService.instance()?.getToken(username, password)?.enqueue(object: Callback<TokenResponse> {
-
-                override fun onResponse(call: Call<TokenResponse>, response: Response<TokenResponse>) {
+            TokenService.fetchAndStore(
+                baseUrl,
+                username,
+                password,
+                activity,
+                onComplete = {
                     enableUserInput()
                     clearUserInput()
-                    val token = response.body()?.token
-                    if (token is String) {
-                        saveSettings(baseUrl, username, password, token)
-                        setStatusMessage("Successfully connected to Gate!")
-                    } else {
-                        setStatusMessage("Error while connecting to Gate. Please try later.")
-                    }
-                }
-
-                override fun onFailure(call: Call<TokenResponse>, t: Throwable) {
+                    setStatusMessage("Connected to Gate. Configuration saved!")
+                },
+                onError = { error ->
                     enableUserInput()
                     clearUserInput()
-                    setStatusMessage("Error while connecting to Gate. Please try later.")
+                    setStatusMessage(error)
                 }
-
-            })
+            )
         } catch (ex: Exception) {
             enableUserInput()
             clearUserInput()
             setStatusMessage("Unexpected error. Check your configuration data and try again.")
-        }
-    }
-
-    private fun saveSettings(baseUrl: String, username: String, password: String, token: String) {
-        val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPreferences.edit()) {
-            putString(Constants.BASE_URL_SHARED_PREF_KEY, baseUrl)
-            putString(Constants.USERNAME_SHARED_PREF_KEY, username)
-            putString(Constants.PASSWORD_SHARED_PREF_KEY, password)
-            putString(Constants.TOKEN_SHARED_PREF_KEY, token)
-            commit()
         }
     }
 
@@ -131,7 +109,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setStatusMessage(text: String) {
-        statusText.setText(text)
+        statusText.text = text
     }
 
 }

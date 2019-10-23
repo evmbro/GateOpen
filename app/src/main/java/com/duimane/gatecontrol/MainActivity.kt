@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.duimane.gatecontrol.api.GateApiService
+import com.duimane.gatecontrol.util.SharedPreferences
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,5 +27,17 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        configureApiService()
     }
+
+    private fun configureApiService() {
+        val preferences = SharedPreferences.get(this) ?: return
+        GateApiService.configure(
+            preferences.baseUrl,
+            preferences.token
+        )
+    }
+
 }
