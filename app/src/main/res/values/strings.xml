@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gate Control</string>
+    <string name="app_name">Gate Open</string>
     <string name="title_home">Home</string>
     <string name="title_settings">Settings</string>
     <string name="open_gate">Open gate</string>
