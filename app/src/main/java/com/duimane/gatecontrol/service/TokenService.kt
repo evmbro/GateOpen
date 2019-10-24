@@ -46,15 +46,20 @@ class TokenService {
                         call: Call<TokenResponse>,
                         response: Response<TokenResponse>
                     ) {
+                        val code = response.code()
                         val token = response.body()?.token
-                        if (response.code() == 200 && token is String) {
-                            GateApiService.configure(url, token)
-                            SharedPreferences.store(activity, UserPreferences(
-                                url, username, password, token
-                            ))
-                            onComplete()
-                        } else if (response.code() == 401) {
-                            onError("Invalid credentials. Please enter valid credentials at Settings screen.")
+                        if (code == 200 && token is String) {
+                            try {
+                                GateApiService.configure(url, token)
+                                SharedPreferences.store(activity, UserPreferences(
+                                    url, username, password, token
+                                ))
+                                onComplete()
+                            } catch (ex: Exception) {
+                                onError("Unexpected error occurred. Please try again.")
+                            }
+                        } else if (code == 401 || code == 400) {
+                            onError("Bad request. Please check your credentials and try again.")
                         } else {
                             onError("Unexpected error occurred. Please try again.")
                         }

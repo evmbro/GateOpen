@@ -1,5 +1,6 @@
-package com.duimane.gatecontrol.ui
+package com.duimane.gatecontrol.fragment
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,11 +24,6 @@ class SettingsFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var statusText: TextView
 
-    override fun onResume() {
-        super.onResume()
-        clearUserInput()
-        setStatusMessage("")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +42,18 @@ class SettingsFragment : Fragment() {
         saveButton.setOnClickListener { saveButtonTapped() }
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        clearUserInput()
+        setStatusMessage("")
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
     }
 
     private fun saveButtonTapped() {
@@ -73,7 +81,6 @@ class SettingsFragment : Fragment() {
                 },
                 onError = { error ->
                     enableUserInput()
-                    clearUserInput()
                     setStatusMessage(error)
                 }
             )

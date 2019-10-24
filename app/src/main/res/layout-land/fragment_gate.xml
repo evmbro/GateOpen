@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/gate_image"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/gate_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:src="@drawable/ic_check_mark"
+            android:id="@+id/gate_open_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
+
+        <ImageButton
+            android:src="@drawable/ic_reload"
+            android:id="@+id/gate_image_refresh_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:background="@drawable/rounded_corner"
+        android:layout_gravity="bottom|center"
+        android:visibility="invisible"
+        android:layout_marginBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:maxWidth="300dp"
+        android:textAlignment="center"
+        android:id="@+id/gate_status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</FrameLayout>

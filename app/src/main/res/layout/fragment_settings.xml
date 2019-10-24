@@ -8,6 +8,7 @@
     android:gravity="center_horizontal">
 
     <EditText
+        android:layout_marginTop="20dp"
         android:id="@+id/server_url_field"
         android:hint="@string/server_url"
         android:layout_width="300dp"
@@ -29,16 +30,21 @@
 
     <FrameLayout
         android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp">
 
         <ProgressBar
             android:id="@+id/settings_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:visibility="invisible"/>
 
         <TextView
+            android:textAlignment="center"
             android:id="@+id/settings_status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

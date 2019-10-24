@@ -3,14 +3,14 @@ package com.duimane.gatecontrol.api
 import com.duimane.gatecontrol.model.response.ImageResponse
 import com.duimane.gatecontrol.model.response.OpenGateResponse
 import com.duimane.gatecontrol.model.response.TokenResponse
-import com.duimane.gatecontrol.util.SharedPreferences
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface GateApiService {
 

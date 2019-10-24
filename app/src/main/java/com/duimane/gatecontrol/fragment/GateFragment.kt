@@ -1,10 +1,10 @@
-package com.duimane.gatecontrol.ui
+package com.duimane.gatecontrol.fragment
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -23,10 +23,10 @@ import retrofit2.Response
 class GateFragment : Fragment() {
 
     private lateinit var gateImageView: ImageView
-    private lateinit var openGateButton: Button
-    private lateinit var refreshImageButton: Button
     private lateinit var progressBar: ProgressBar
     private lateinit var statusText: TextView
+    private lateinit var openGateButton: View
+    private lateinit var refreshImageButton: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,20 +34,25 @@ class GateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_gate, container, false)
+        bindViews(root)
+        return root
+    }
+
+    private fun bindViews(root: View) {
         gateImageView = root.findViewById(R.id.gate_image)
-        openGateButton = root.findViewById(R.id.gate_open_button)
-        refreshImageButton = root.findViewById(R.id.gate_image_refresh_button)
         progressBar = root.findViewById(R.id.gate_pb)
         statusText = root.findViewById(R.id.gate_status_text)
-        refreshImageButton.setOnClickListener { loadImage() }
+        openGateButton = root.findViewById(R.id.gate_open_button)
+        refreshImageButton = root.findViewById(R.id.gate_image_refresh_button)
         openGateButton.setOnClickListener { openGate() }
-        return root
+        refreshImageButton.setOnClickListener { loadImage() }
     }
 
     override fun onResume() {
         super.onResume()
         setStatusText("")
         loadImage()
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
     }
 
     private fun loadImage(withRetryAttempt: Boolean = true) {
@@ -65,6 +70,7 @@ class GateFragment : Fragment() {
 
                     val photo = response.body()?.photo
                     if (response.code() == 200 && photo != null) {
+                        setStatusText("Image loaded!")
                         gateImageView.setImageBitmap(ImageUtils.base64ToBitmap(photo))
                     } else if (response.code() == 401) {
                         if (!withRetryAttempt) {
@@ -168,7 +174,13 @@ class GateFragment : Fragment() {
     }
 
     private fun setStatusText(text: String) {
-        statusText.text = text
+        if (text.isEmpty()) {
+            statusText.text = ""
+            statusText.visibility = View.GONE
+        } else {
+            statusText.text = text
+            statusText.visibility = View.VISIBLE
+        }
     }
 
 }
