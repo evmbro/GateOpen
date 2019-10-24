@@ -1,4 +1,4 @@
-package com.duimane.gatecontrol.fragment
+package com.duimane.gateopen.fragment
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -11,8 +11,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.duimane.gatecontrol.R
-import com.duimane.gatecontrol.service.TokenService
+import com.duimane.gateopen.R
+import com.duimane.gateopen.service.TokenService
 
 class SettingsFragment : Fragment() {
 

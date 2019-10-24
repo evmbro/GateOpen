@@ -1,4 +1,4 @@
-package com.duimane.gatecontrol.util
+package com.duimane.gateopen.util
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

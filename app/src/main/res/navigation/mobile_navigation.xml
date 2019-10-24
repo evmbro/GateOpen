@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_gate"
-        android:name="com.duimane.gatecontrol.fragment.GateFragment"
+        android:name="com.duimane.gateopen.fragment.GateFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_gate" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.duimane.gatecontrol.fragment.SettingsFragment"
+        android:name="com.duimane.gateopen.fragment.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

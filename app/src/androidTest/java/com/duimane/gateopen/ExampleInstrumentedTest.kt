@@ -1,4 +1,4 @@
-package com.duimane.gatecontrol
+package com.duimane.gateopen
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

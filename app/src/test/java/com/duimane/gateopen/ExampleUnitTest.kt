@@ -1,4 +1,4 @@
-package com.duimane.gatecontrol
+package com.duimane.gateopen
 
 import org.junit.Test
 

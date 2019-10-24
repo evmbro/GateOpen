@@ -1,4 +1,4 @@
-package com.duimane.gatecontrol.model
+package com.duimane.gateopen.model
 
 data class UserPreferences(val baseUrl: String,
                            val username: String,

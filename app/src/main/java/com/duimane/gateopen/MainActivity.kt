@@ -1,4 +1,4 @@
-package com.duimane.gatecontrol
+package com.duimane.gateopen
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -9,9 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.duimane.gatecontrol.api.GateApiService
-import com.duimane.gatecontrol.fragment.GateFragment
-import com.duimane.gatecontrol.util.SharedPreferences
+import com.duimane.gateopen.api.GateApiService
+import com.duimane.gateopen.fragment.GateFragment
+import com.duimane.gateopen.util.SharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 

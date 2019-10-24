@@ -1,8 +1,8 @@
-package com.duimane.gatecontrol.api
+package com.duimane.gateopen.api
 
-import com.duimane.gatecontrol.model.response.ImageResponse
-import com.duimane.gatecontrol.model.response.OpenGateResponse
-import com.duimane.gatecontrol.model.response.TokenResponse
+import com.duimane.gateopen.model.response.ImageResponse
+import com.duimane.gateopen.model.response.OpenGateResponse
+import com.duimane.gateopen.model.response.TokenResponse
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit

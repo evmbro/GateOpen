@@ -1,4 +1,4 @@
-package com.duimane.gatecontrol.fragment
+package com.duimane.gateopen.fragment
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -10,12 +10,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.duimane.gatecontrol.R
-import com.duimane.gatecontrol.api.GateApiService
-import com.duimane.gatecontrol.model.response.ImageResponse
-import com.duimane.gatecontrol.model.response.OpenGateResponse
-import com.duimane.gatecontrol.service.TokenService
-import com.duimane.gatecontrol.util.ImageUtils
+import com.duimane.gateopen.R
+import com.duimane.gateopen.api.GateApiService
+import com.duimane.gateopen.model.response.ImageResponse
+import com.duimane.gateopen.model.response.OpenGateResponse
+import com.duimane.gateopen.service.TokenService
+import com.duimane.gateopen.util.ImageUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

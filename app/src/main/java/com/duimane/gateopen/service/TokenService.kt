@@ -1,10 +1,10 @@
-package com.duimane.gatecontrol.service
+package com.duimane.gateopen.service
 
 import android.app.Activity
-import com.duimane.gatecontrol.api.GateApiService
-import com.duimane.gatecontrol.model.UserPreferences
-import com.duimane.gatecontrol.model.response.TokenResponse
-import com.duimane.gatecontrol.util.SharedPreferences
+import com.duimane.gateopen.api.GateApiService
+import com.duimane.gateopen.model.UserPreferences
+import com.duimane.gateopen.model.response.TokenResponse
+import com.duimane.gateopen.util.SharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

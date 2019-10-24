@@ -1,8 +1,8 @@
-package com.duimane.gatecontrol.util
+package com.duimane.gateopen.util
 
 import android.app.Activity
 import android.content.Context
-import com.duimane.gatecontrol.model.UserPreferences
+import com.duimane.gateopen.model.UserPreferences
 
 class SharedPreferences {
 
