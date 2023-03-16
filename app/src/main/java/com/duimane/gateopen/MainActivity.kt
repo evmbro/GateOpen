@@ -2,27 +2,31 @@ package com.duimane.gateopen
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.duimane.gateopen.api.GateApiService
+import com.duimane.gateopen.databinding.ActivityMainBinding
 import com.duimane.gateopen.fragment.GateFragment
 import com.duimane.gateopen.util.SharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        val navController = navHostFragment!!.findNavController()
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -48,12 +52,10 @@ class MainActivity : AppCompatActivity() {
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             navView.isVisible = false
             supportActionBar?.hide()
-            window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-            ft.add(container.id, GateFragment(), "fullscreen")
+            ft.add(binding.container.id, GateFragment(), "fullscreen")
         } else {
             navView.isVisible = true
             supportActionBar?.show()
-            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
             supportFragmentManager.findFragmentByTag("fullscreen")?.let { f ->
                 ft.remove(f)
             }

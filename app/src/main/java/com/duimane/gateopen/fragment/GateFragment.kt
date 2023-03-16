@@ -10,8 +10,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.duimane.gateopen.R
 import com.duimane.gateopen.api.GateApiService
+import com.duimane.gateopen.databinding.FragmentGateBinding
 import com.duimane.gateopen.model.response.ImageResponse
 import com.duimane.gateopen.model.response.OpenGateResponse
 import com.duimane.gateopen.service.TokenService
@@ -21,6 +21,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class GateFragment : Fragment() {
+
+    private var _binding: FragmentGateBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var gateImageView: ImageView
     private lateinit var progressBar: ProgressBar
@@ -33,17 +38,17 @@ class GateFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_gate, container, false)
-        bindViews(root)
-        return root
+        _binding = FragmentGateBinding.inflate(inflater, container, false)
+        bindViews()
+        return binding.root
     }
 
-    private fun bindViews(root: View) {
-        gateImageView = root.findViewById(R.id.gate_image)
-        progressBar = root.findViewById(R.id.gate_pb)
-        statusText = root.findViewById(R.id.gate_status_text)
-        openGateButton = root.findViewById(R.id.gate_open_button)
-        refreshImageButton = root.findViewById(R.id.gate_image_refresh_button)
+    private fun bindViews() {
+        gateImageView = binding.gateImage
+        progressBar = binding.gatePb
+        statusText = binding.gateStatusText
+        openGateButton = binding.gateOpenButton
+        refreshImageButton = binding.gateImageRefreshButton
         openGateButton.setOnClickListener { openGate() }
         refreshImageButton.setOnClickListener { loadImage() }
     }

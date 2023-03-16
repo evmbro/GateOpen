@@ -13,7 +13,7 @@
         android:hint="@string/server_url"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:inputType="textUri"/>
+        android:inputType="textUri" />
 
     <EditText
         android:id="@+id/username_field"

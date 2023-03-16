@@ -1,6 +1,5 @@
 package com.duimane.gateopen.fragment
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,15 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.duimane.gateopen.R
+import com.duimane.gateopen.databinding.FragmentSettingsBinding
 import com.duimane.gateopen.service.TokenService
 
 class SettingsFragment : Fragment() {
+
+    private var _binding: FragmentSettingsBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var serverUrlField: EditText
     private lateinit var usernameField: EditText
@@ -30,30 +34,21 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_settings, container, false)
-
-        serverUrlField = root.findViewById(R.id.server_url_field)
-        usernameField = root.findViewById(R.id.username_field)
-        passwordField = root.findViewById(R.id.password_field)
-        saveButton = root.findViewById(R.id.save_button)
-        progressBar = root.findViewById(R.id.settings_pb)
-        statusText = root.findViewById(R.id.settings_status_text)
-
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        serverUrlField = binding.serverUrlField
+        usernameField = binding.usernameField
+        passwordField = binding.passwordField
+        saveButton = binding.saveButton
+        progressBar = binding.settingsPb
+        statusText = binding.settingsStatusText
         saveButton.setOnClickListener { saveButtonTapped() }
-
-        return root
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
         clearUserInput()
         setStatusMessage("")
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    }
-
-    override fun onPause() {
-        super.onPause()
-        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
     }
 
     private fun saveButtonTapped() {
